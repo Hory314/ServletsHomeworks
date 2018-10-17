@@ -18,15 +18,15 @@ public class Servlet302 extends HttpServlet
         response.setCharacterEncoding("UTF-8");
 
         String binary = request.getParameter("binary");
-        if(binary.matches("^1{1}[01]*$|^0$"))
+        if(binary.matches("^1{1}[01]*$|^0$")) // lapie tylko samo 0 lub 1 z przodu a potem 0 lub 1 ile razy sie chce
         {
-            char[] chars;
-            chars = binary.toCharArray();
-
-            for(int i = chars.length-1; i >= 0; i--)
+            int sum = 0;
+            for(int i = 0; i < binary.length(); i++)
             {
-                //todo chars[i]
+                int b = Character.getNumericValue(binary.charAt(binary.length() - 1 - i));
+                sum += b * (int)Math.pow(2.0, i);
             }
+            wr.append(binary + "<sub>2</sub> = " + sum + "<sub>10</sub>");
         }
         else
         {
